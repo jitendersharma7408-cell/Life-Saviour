@@ -45,6 +45,7 @@ export default function Register() {
       const result = await base44.auth.verifyOtp({ email, otpCode });
       if (result?.access_token) {
         base44.auth.setToken(result.access_token);
+        try { await base44.auth.updateMe({ role: 'coordinator' }); } catch { /* non-blocking */ }
       }
       window.location.href = safeReturnTo();
     } catch (err) {

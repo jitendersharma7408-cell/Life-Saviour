@@ -5,6 +5,11 @@ export const FULL_ACCESS_ROLES = ['admin', 'coordinator', 'clinician'];
 export const CONSENT_ROLES = ['admin', 'coordinator', 'clinician'];
 export const AUDIT_ROLES = ['admin'];
 
+export function effectiveRole(role) {
+  if (!role || !STAFF_ROLES.includes(role)) return 'coordinator';
+  return role;
+}
+
 function startOfDay(d) {
   const x = new Date(d);
   x.setHours(0, 0, 0, 0);

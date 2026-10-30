@@ -6,12 +6,12 @@ import ConsentBanner from '@/components/ConsentBanner';
 import AddTaskDialog from '@/components/AddTaskDialog';
 import StatusBadge from '@/components/StatusBadge';
 import { Loader2, ArrowLeft, ShieldCheck } from 'lucide-react';
-import { FULL_ACCESS_ROLES, effectiveStatus, formatDate, PATHWAY_LABEL, TYPE_LABEL, daysOverdue } from '@/lib/care';
+import { FULL_ACCESS_ROLES, effectiveStatus, formatDate, PATHWAY_LABEL, TYPE_LABEL, daysOverdue, effectiveRole } from '@/lib/care';
 
 export default function PatientTimeline() {
   const { id } = useParams();
   const { user } = useAuth();
-  const role = user?.role;
+  const role = effectiveRole(user?.role);
   const [patient, setPatient] = useState(null);
   const [plan, setPlan] = useState(null);
   const [tasks, setTasks] = useState([]);

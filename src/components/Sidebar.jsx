@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ListChecks, ShieldCheck, ScrollText, HeartPulse, Menu, X, LayoutDashboard, Users2, ScanLine, Stethoscope, Pill } from 'lucide-react';
+import { ListChecks, ShieldCheck, ScrollText, HeartPulse, Menu, X } from 'lucide-react';
 import { CONSENT_ROLES, AUDIT_ROLES, FULL_ACCESS_ROLES } from '@/lib/care';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from '@/components/LanguageSelector';
 
 function navItems(role, t) {
   const items = [
-    { to: '/', label: t('today'), icon: ListChecks, end: true },
-    { to: '/dashboard', label: t('dashboard'), icon: LayoutDashboard },
-    { to: '/medicine-scanner', label: t('medicineScanner'), icon: Pill },
-    { to: '/doctor-ai', label: t('doctorAi'), icon: Stethoscope },
-    { to: '/families', label: t('families'), icon: Users2 },
-    { to: '/scanner', label: t('scanner'), icon: ScanLine }
+    { to: '/', label: t('today'), icon: ListChecks, end: true }
   ];
   if (CONSENT_ROLES.includes(role)) items.push({ to: '/consent', label: t('consent'), icon: ShieldCheck });
   if (AUDIT_ROLES.includes(role)) items.push({ to: '/audit', label: t('audit'), icon: ScrollText });

@@ -13,14 +13,9 @@ import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 import Layout from '@/components/Layout';
 import Today from '@/pages/Today';
-import Dashboard from '@/pages/Dashboard';
 import PatientTimeline from '@/pages/PatientTimeline';
-import Families from '@/pages/Families';
-import ScannerPage from '@/pages/ScannerPage';
 import Consent from '@/pages/Consent';
 import AuditLogPage from '@/pages/AuditLog';
-import DoctorAi from '@/pages/DoctorAi';
-import MedicineScanner from '@/pages/MedicineScanner';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const AuthenticatedApp = () => {
@@ -56,12 +51,7 @@ const AuthenticatedApp = () => {
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route element={<Layout />}>
           <Route path="/" element={<Today />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/patients/:id" element={<PatientTimeline />} />
-          <Route path="/families" element={<Families />} />
-          <Route path="/medicine-scanner" element={<MedicineScanner />} />
-          <Route path="/doctor-ai" element={<DoctorAi />} />
-          <Route path="/scanner" element={<ScannerPage />} />
           <Route path="/consent" element={<Consent />} />
           <Route path="/audit" element={<AuditLogPage />} />
         </Route>

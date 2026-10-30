@@ -57,6 +57,11 @@
           "user_condition": {
             "role": "clinician"
           }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
         }
       ]
     },

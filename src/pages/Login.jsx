@@ -127,6 +127,9 @@ export default function Login() {
           )}
         </Button>
       </form>
+      <p className="mt-6 text-center text-sm text-muted-foreground">
+        Demo: register a staff account to see the care coordination queue
+      </p>
     </AuthLayout>
   );
 }

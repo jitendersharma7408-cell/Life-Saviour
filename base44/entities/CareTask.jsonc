@@ -105,6 +105,11 @@
               "data.type": "medication"
             }
           ]
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
         }
       ]
     },

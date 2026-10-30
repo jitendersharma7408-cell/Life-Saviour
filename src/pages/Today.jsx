@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useAuth } from '@/lib/AuthContext';
 import TaskRow from '@/components/TaskRow';
-import { FULL_ACCESS_ROLES, classifyTask } from '@/lib/care';
+import { FULL_ACCESS_ROLES, classifyTask, effectiveRole } from '@/lib/care';
 import { Loader2 } from 'lucide-react';
 
 const SECTIONS = [
@@ -14,7 +14,7 @@ const SECTIONS = [
 
 export default function Today() {
   const { user } = useAuth();
-  const role = user?.role;
+  const role = effectiveRole(user?.role);
   const [tasks, setTasks] = useState([]);
   const [patients, setPatients] = useState([]);
   const [escalations, setEscalations] = useState([]);
