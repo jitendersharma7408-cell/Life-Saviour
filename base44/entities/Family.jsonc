@@ -1,0 +1,106 @@
+{
+  "name": "Family",
+  "type": "object",
+  "properties": {
+    "family_name": {
+      "type": "string"
+    },
+    "primary_contact": {
+      "type": "string",
+      "description": "Patient id of the primary contact"
+    },
+    "members": {
+      "type": "string",
+      "description": "Comma-separated patient ids belonging to the family"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "family_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "lab"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "pharmacy"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        }
+      ]
+    }
+  }
+}

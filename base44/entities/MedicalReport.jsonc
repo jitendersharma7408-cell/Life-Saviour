@@ -1,0 +1,127 @@
+{
+  "name": "MedicalReport",
+  "type": "object",
+  "properties": {
+    "patient": {
+      "type": "string",
+      "description": "Patient id"
+    },
+    "family": {
+      "type": "string",
+      "description": "Family id (optional)"
+    },
+    "title": {
+      "type": "string"
+    },
+    "report_file_uri": {
+      "type": "string",
+      "description": "URI of uploaded report file (stored privately)"
+    },
+    "report_type": {
+      "type": "string",
+      "enum": [
+        "lab",
+        "prescription",
+        "discharge",
+        "imaging",
+        "other"
+      ],
+      "default": "other"
+    },
+    "ai_summary": {
+      "type": "string",
+      "description": "AI-generated easy-to-understand summary"
+    },
+    "report_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "patient",
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "lab"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "pharmacy"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        }
+      ]
+    }
+  }
+}

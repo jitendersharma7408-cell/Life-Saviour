@@ -1,0 +1,188 @@
+{
+  "name": "CareTask",
+  "type": "object",
+  "properties": {
+    "patient": {
+      "type": "string",
+      "description": "Patient id"
+    },
+    "pathway_step": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "lab",
+        "follow_up",
+        "referral",
+        "medication",
+        "appointment"
+      ]
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Provider id or name"
+    },
+    "owner_type": {
+      "type": "string",
+      "enum": [
+        "clinic",
+        "lab",
+        "pharmacy",
+        "patient",
+        "insurer"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "done",
+        "missed",
+        "escalated"
+      ],
+      "default": "pending"
+    },
+    "sla_hours": {
+      "type": "number",
+      "default": 48
+    },
+    "notes": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "patient",
+    "type",
+    "due_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "lab"
+              }
+            },
+            {
+              "data.type": "lab"
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "pharmacy"
+              }
+            },
+            {
+              "data.type": "medication"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "clinician"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "lab"
+              }
+            },
+            {
+              "data.type": "lab"
+            }
+          ]
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "pharmacy"
+              }
+            },
+            {
+              "data.type": "medication"
+            }
+          ]
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "coordinator"
+          }
+        }
+      ]
+    }
+  }
+}
